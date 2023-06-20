@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta
@@ -56,6 +56,14 @@
     />
 
     <!-- 
+    - material icon link
+    -->
+    <link 
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" 
+    />
+
+    <!-- 
       - Custom CSS Link
      -->
     <link 
@@ -72,7 +80,64 @@
 	</head>
 	<body>
   
+    <!-- 
+      - #HEADER
+     -->
 
+    <header class="header" data-header>
+
+      <a href="/" class="logo">
+        <img 
+          src="./public/images/logo-light.svg" 
+          alt="logo-light" 
+          width="200" 
+          height="32" 
+          class="logo-light"
+        >
+     
+        <img 
+          src="./public/images/logo-dark.svg" 
+          alt="logo-dark" 
+          width="200" 
+          height="32" 
+          class="logo-dark"
+        >
+      </a>
+
+
+      <!-- navbar -->
+      <nav class="navbar">
+        <ul class="navbar-list">
+
+          <li>
+            <a href="/" class="navbar-link title-small has-state">Home</a>
+          </li>
+
+
+          <li>
+            <a href="./recipes.html" class="navbar-link title-small has-state">Recipes</a>
+          </li>
+
+
+        </ul>
+      </nav>
+
+      <button 
+        class="icon-btn theme-switch has-state" 
+        aria-pressed="false" 
+        aria-label="Toggle light and dark theme" 
+        data-theme-btn
+      >
+      <span class="material-symbols-outlined light-icon" aria-hidden="true">light_mode</span>
+      <span class="material-symbols-outlined dark-icon" aria-hidden="true">dark_mode</span>
+      </button>
+
+      <a href="./saved-recipes.html" class="btn btn-primary has-state">
+        <span class="material-symbols-outlined" aria-hidden="true">book</span>
+
+        <span class="span">Saved Recipes</span>
+      </a>
+    </header>
 
   </body>
 </html>
