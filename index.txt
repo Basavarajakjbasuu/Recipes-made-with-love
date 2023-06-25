@@ -185,7 +185,7 @@ Alcohol-Cocktail
 
 #---------- FOOTER ----------#
 
-Copyright 2023 codewithsadee
+Copyright 2023 bassu
 
 alt = Cook.io
 
