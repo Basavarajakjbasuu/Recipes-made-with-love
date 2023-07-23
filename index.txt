@@ -340,7 +340,7 @@ value = alcohol-free
 Celery Free
 value = celery-free
 
-Crustcean Free
+Crustacean Free
 value = crustacean-free
 
 Dairy Free

@@ -61,11 +61,12 @@ interface AddEventOnElementsOptions {
 	callback: EventListenerOrEventListenerObject;
 }
 
-const addEventOnElements = ({
+export const addEventOnElements = ({
 	$elements,
 	eventType,
 	callback,
 }: AddEventOnElementsOptions) => {
+
 	for (const element of Array.from($elements)) {
 		element.addEventListener(eventType, callback);
 	}
