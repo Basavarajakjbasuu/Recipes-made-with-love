@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="X-UA-Compatible"
+			content="IE=edge" 
+    />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" 
+    />
+
+    <!-- 
+      - Primary meta tags
+     -->
+    <title>Saved recipes</title>
+    <meta 
+      name="description" 
+      content="Recipes.io - Cooking made easy." 
+    />
+    <meta 
+      name="title" 
+      content="This is a recipe application made by bassu" 
+    />
+
+     <!-- 
+        - Favicon
+      -->
+    <link 
+      rel="shortcut icon" 
+      href="/favicon.svg" 
+      type="image/svg+xml" 
+    />
+
+    <!-- 
+      - theme.ts
+     -->
+    <script src="/src/ts/theme.ts" defer></script>
+
+    <!-- 
+      - Googl font
+     -->
+    <link 
+      rel="preconnect" 
+      href="https://fonts.googleapis.com"
+    />
+    <link 
+      rel="preconnect" 
+      href="https://fonts.gstatic.com" 
+      crossorigin 
+    />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Serif+Display&display=swap"
+      rel="stylesheet" 
+    />
+
+    <!-- 
+    - material icon link
+    -->
+    <link 
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" 
+    />
+
+    <!-- 
+      - Custom CSS Link
+     -->
+    <link 
+      rel="stylesheet" 
+      href="/src/css/style.css" 
+    />
+
+    <!-- 
+      - Custom JS Link
+     -->
+    <script 
+      src="/src/ts/global.ts" 
+      type="module" 
+      defer
+    ></script>
+    <script 
+      src="/src/ts/saved_recipes.ts" 
+      type="module" 
+      defer 
+    /></script>
+
+	</head>
+	<body>
+  
+    <!-- 
+      - #HEADER
+     -->
+
+    <header class="header" data-header>
+
+      <a href="/" class="logo">
+        <img 
+          src="/images/logo-light.svg" 
+          alt="logo-light" 
+          width="200" 
+          height="32" 
+          class="logo-light"
+        >
+     
+        <img 
+          src="/images/logo-dark.svg" 
+          alt="logo-dark" 
+          width="200" 
+          height="32" 
+          class="logo-dark"
+        >
+      </a>
+
+
+      <!-- navbar -->
+      <nav class="navbar">
+        <ul class="navbar-list">
+
+          <li>
+            <a href="/" class="navbar-link title-small has-state">Home</a>
+          </li>
+
+
+          <li>
+            <a href="./recipes.html" class="navbar-link title-small has-state">Recipes</a>
+          </li>
+
+
+        </ul>
+      </nav>
+
+      <button 
+        class="icon-btn theme-switch has-state" 
+        aria-pressed="false" 
+        aria-label="Toggle light and dark theme" 
+        data-theme-btn
+      >
+      <span class="material-symbols-outlined light-icon" aria-hidden="true">light_mode</span>
+      <span class="material-symbols-outlined dark-icon" aria-hidden="true">dark_mode</span>
+      </button>
+
+      <a href="./saved-recipes.html" class="btn btn-primary has-state">
+        <span class="material-symbols-outlined" aria-hidden="true">book</span>
+
+        <span class="span">Saved Recipes</span>
+      </a>
+    </header>
+
+    <!-- 
+      - #MOBILE NAV
+    -->
+
+    <nav class="mobile-nav" aria-label="primary">
+      <ul class="nav-list">
+
+        <li class="nav-item">
+          <a href="./recipes.html" class="nav-link">
+
+            <span class="item-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">
+                lunch_dining
+              </span>
+            </span>
+
+            <span class="label-medium">
+              Recipes
+            </span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="../../index.html" class="nav-link" aria-current="false">
+
+            <span class="item-icon">
+              <span class="material-symbols-outlined" aria-hidden="false">
+                home
+              </span>
+            </span>
+
+            <span class="label-medium">
+              Home
+            </span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="./saved-recipes.html" class="nav-link" aria-current="true">
+            <span class="item-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">
+                book
+              </span>
+            </span>
+
+            <span class="label-medium">
+              Saved
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- 
+      -# MAIN
+     -->
+    <main>
+      <article 
+        class="article container saved-recipe-page"
+        data-saved-recipe-container
+      ></article>
+    </main>  
+
+
+    <!-- 
+      - #FOOTER
+     -->
+
+    <footer class="footer">
+
+      <p class="copyright body-medium">Copyright 
+        <script>document.write(/\d{4}/.exec(Date())[0])</script>  
+      bassu</p>
+
+      <a href="/" class="logo">
+        <img 
+          src="../../public/images/logo-light.svg" 
+          alt="logo-light" 
+          width="200" 
+          height="32" 
+          class="logo-light"
+        >
+     
+        <img 
+          src="../../public/images/logo-dark.svg" 
+          alt="logo-dark" 
+          width="200" 
+          height="32" 
+          class="logo-dark"
+        >
+      </a>
+
+
+      <a href="https://www.edamam.com/" target="_blank" class="edamam">
+        <img src="../../public/images/edamam.svg" width="200" height="200" loading="lazy" alt="edamam free reipe api">
+      </a>
+    </footer>
+
+
+  </body>
+</html>
