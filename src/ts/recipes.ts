@@ -12,7 +12,6 @@
 
 import { fetchData } from "./api";
 import { $skeletonCard, cardQueries } from "./global";
-import { addEventOnElements } from "./home";
 import { getTime } from "./module";
 
 /**
@@ -138,3 +137,142 @@ window.addEventListener("scroll", () => {
 /**
  * Request recipes and render
  */
+
+const $gridList = document.querySelector("[data-grid-list]");
+const $loadMore = document.querySelector("[data-load-more]");
+const defaultQuires = [
+  ['mealType', 'breakfast'],
+  ['mealType', 'dinner'],
+  ['mealType', 'lunch'],
+  ['mealType', 'snack'],
+  ['mealType', 'teatime'],
+  ...cardQueries
+]
+
+if ($gridList !== null) {
+  $gridList.innerHTML = $skeletonCard.repeat(20);
+}
+
+let nextPageUrl: string;
+const fallbackImage = '../../public/images/image-placeholder.svg';
+
+const renderRecipes = data => {
+
+  data.hits.map((item, index) => {
+
+    const {
+      recipe: {
+        image,
+        label: title,
+        totalTime: cookingTime,
+        uri
+      }
+    } = item;
+ 
+
+    // extracting recipeId
+    const recipeId = uri.slice(uri.lastIndexOf('_') + 1);
+
+    // save recipes
+    const isSaved = window.localStorage.getItem(`recipe${recipeId}`);
+
+    const $card = document.createElement("div");
+    $card.classList.add("card");
+    $card.style.animationDelay = `${ 100 * index }`
+
+    $card.innerHTML = `
+      <div class="card">
+        <figure class="card-media img-holder">
+          <img 
+            src="${image}" 
+            height="200" 
+            loading="lazy" 
+            alt="${title}" 
+            onerror="this.onerror=null;this.src='${fallbackImage}';"
+            class="img-cover"
+          />
+        </figure>
+
+        <div class="card-body">
+
+          <h3 class="title-small">
+          <a href="./detail.html?recipe=${recipeId}" class="card-link">${title || 'UnTitled'
+      }</a>
+          </h3>
+
+          <div class="meta-wrapper">
+
+          <div class="meta-item">
+            <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+
+            <span class="label-medium">
+            ${getTime(cookingTime).time || '<10'} ${getTime(cookingTime).timeUnit} 
+            </span>
+          </div>
+
+          <button
+            class="icon-btn has-state ${isSaved ? 'saved' : 'removed'}" 
+            aria-label="Add to saved recipes" 
+            onClick="saveRecipe(this, '${recipeId}')"
+          >
+            <span class="material-symbols-outlined bookmark-add" aria-hidden="true">bookmark_add</span>
+            <span class="material-symbols-outlined bookmark" aria-hidden="true">bookmark</span>
+          </button>
+
+          </div>
+
+        </div>
+      </div>
+    `;
+
+    $gridList?.appendChild($card)
+
+  });  
+}
+
+let requestedBefore: boolean = true;
+
+fetchData(queries || defaultQuires, data => {
+  
+  const { _links: { next } } = data;
+  nextPageUrl = next?.href;
+
+  if ($gridList) {
+    $gridList.innerHTML = "";
+  }
+
+  requestedBefore = false;
+
+  if (data.hits.length) {
+    renderRecipes(data)
+  } else {
+    if ($loadMore) {
+      $loadMore.innerHTML = `<p class="body-medium info-text">No recipe found!</p>`
+    }
+  }
+});
+
+const CONTAINER_MAX_WIDTH = 1200;
+const CONTAINER_MIN_CARD = 6;
+
+window.addEventListener('scroll', async () => {
+  
+  if ($loadMore && $loadMore.getBoundingClientRect().top < window.innerHeight && !requestedBefore && nextPageUrl) {
+    
+    $loadMore.innerHTML = $skeletonCard.repeat(Math.round(($loadMore?.clientWidth / (CONTAINER_MAX_WIDTH)) * CONTAINER_MIN_CARD));
+    requestedBefore = true;
+
+    const response = await fetch(nextPageUrl);
+    const data = await response.json();
+
+
+    const { _links: { next } } = data;
+
+    nextPageUrl = next?.href;
+
+    renderRecipes(data);
+    $loadMore.innerHTML = "";
+    requestedBefore = false;
+  }
+
+})

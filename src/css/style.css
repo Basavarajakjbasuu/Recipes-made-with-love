@@ -366,7 +366,7 @@ main { flex-grow: 1; }
   padding-inline: 16px;
 }
 
-
+  
 .grid-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));

@@ -325,6 +325,7 @@ if (sliderSections) {
 					`;
 
 					$sliderWrapper.appendChild($sliderItem);
+
 				});
 
 				$sliderWrapper.innerHTML += `
