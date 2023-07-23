@@ -22,7 +22,7 @@ export const fetchData = async function (queries: [string, any][], successCallba
         .replace(/\+/g, "%2B");
     
 
-    const url = `${ACCESS_POINT}?app_id=${import.meta.env.VITE_APP_ID}&app_key=${import.meta.env.VITE_API_KEY}&type=${import.meta.env.VITE_TYPE}${query ? `&${query}` : ""}` 
+    const url = `${window.ACCESS_POINT}?app_id=${import.meta.env.VITE_APP_ID}&app_key=${import.meta.env.VITE_API_KEY}&type=${import.meta.env.VITE_TYPE}${query ? `&${query}` : ""}` 
 
     const response = await fetch(url);
 

@@ -35,7 +35,7 @@ const ROOT = "https://api.edamam.com/api/recipes/v2";
 
 window.saveRecipe = function (element, recipeId) {
     const isSaved :string | null = window.localStorage.getItem(`recipe${recipeId}`);
-    ACCESS_POINT = `${ROOT}/${recipeId}`;
+    window.ACCESS_POINT = `${ROOT}/${recipeId}`;
 
     if (!isSaved) {
         fetchData(cardQueries, function (data: any) {
@@ -44,7 +44,7 @@ window.saveRecipe = function (element, recipeId) {
             element.classList.toggle("removed");
             showNotification("Added to Recipe book")
         });
-        ACCESS_POINT = ROOT;
+        window.ACCESS_POINT = ROOT;
     } else {
         window.localStorage.removeItem(`recipe${recipeId}`);
         element.classList.toggle("saved");
