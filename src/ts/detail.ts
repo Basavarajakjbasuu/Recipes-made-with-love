@@ -108,7 +108,7 @@ fetchData(null, (data: RecipeData) => {
     `;
   });
 
-  ingredientLines.map(ingredient => {
+  ingredientLines.map((ingredient: string) => {
     ingredientItems += `
       <li class="ingr-item">
         ${ingredient}

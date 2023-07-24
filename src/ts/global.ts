@@ -8,7 +8,7 @@
 
 import { fetchData } from "./api";
 
-export const cardQueries: string []  = [
+export const cardQueries: [string, string][] = [
     ["field", "uri"],
     ["field", "label"],
     ["field", "image"],
@@ -58,7 +58,7 @@ $snackbarContainer.classList.add("snackbar-container");
 
 document.body.appendChild($snackbarContainer);
 
-function showNotification(message) {
+function showNotification(message: string) {
     const $snackbar = document.createElement("div");
     $snackbar.classList.add("snackbar");
     $snackbar.innerHTML = `
@@ -66,5 +66,5 @@ function showNotification(message) {
     `;
 
     $snackbarContainer.appendChild($snackbar);
-    $snackbarContainer.addEventListener("animationend", e => $snackbarContainer.removeChild($snackbar))
+    $snackbarContainer.addEventListener("animationend", () => $snackbarContainer.removeChild($snackbar))
 }

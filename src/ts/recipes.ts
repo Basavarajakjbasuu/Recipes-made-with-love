@@ -12,6 +12,7 @@
 
 import { fetchData } from "./api";
 import { $skeletonCard, cardQueries } from "./global";
+import { RecipeItem } from "./home";
 import { getTime } from "./module";
 
 /**
@@ -156,9 +157,9 @@ if ($gridList !== null) {
 let nextPageUrl: string;
 const fallbackImage = '../../public/images/image-placeholder.svg';
 
-const renderRecipes = data => {
+const renderRecipes = (data: RecipeItem) => {
 
-  data.hits.map((item, index) => {
+  data?.hits.map((item: RecipeItem, index: number) => {
 
     const {
       recipe: {
