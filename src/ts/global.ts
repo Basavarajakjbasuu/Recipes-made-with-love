@@ -8,7 +8,7 @@
 
 import { fetchData } from "./api";
 
-export const cardQueries: string [][]  = [
+export const cardQueries: string []  = [
     ["field", "uri"],
     ["field", "label"],
     ["field", "image"],

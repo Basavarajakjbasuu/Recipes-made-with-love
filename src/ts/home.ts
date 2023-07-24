@@ -30,7 +30,7 @@ const $SearchError: HTMLParagraphElement | null = document.querySelector(
 if ($SearchField && $SearchBtn) {
 	$SearchBtn.addEventListener('click', function (this: HTMLElement) {
 		if ($SearchField.value) {
-			window.location.href = `/recipes.html?q=${
+			window.location.href = `/src/pages/recipes.html?q=${
 				($SearchField as HTMLInputElement).value
 			}`;
 		} else if ($SearchError) {
@@ -152,7 +152,7 @@ const addTabContent = ($currentTabBtn, $currentTabPanel) => {
 		function (data) {
 			$currentTabPanel.innerHTML = '';
 
-			for (let i = 0; i < 12; i++) {
+			for (let i = 0; i < 10; i++) {
 				const {
 					recipe: { image, label: title, totalTime: cookingTime, uri },
 				} = data.hits[i];
@@ -217,7 +217,7 @@ const addTabContent = ($currentTabBtn, $currentTabPanel) => {
 			$currentTabPanel.appendChild($girdList);
 
 			$currentTabPanel.innerHTML += `
-			<a href="./recipes.html?mealType=${$currentTabBtn.textContent
+			<a href="/src/pages/recipes.html?mealType=${$currentTabBtn.textContent
 				.trim()
 				.toLowerCase()}" class="btn btn-secondary label-large has-state">Show more</a>
 		`;
@@ -330,7 +330,7 @@ if (sliderSections) {
 
 				$sliderWrapper.innerHTML += `
 				<li class="slider-item" data-slider-item>
-					<a href="./recipes.html?cuisineType=${cuisineTypes[index].toLowerCase()}" class="load-more-card has-state">
+					<a href="/src/pages/recipes.html?cuisineType=${cuisineTypes[index].toLowerCase()}" class="load-more-card has-state">
 						<span class="label-type">Show more</span>
 
 						<span class="material-symbols-outlined bookmark" aria-hidden="true">navigate_next</span>
