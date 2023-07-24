@@ -241,7 +241,6 @@ export interface RecipeItem {
     totalTime: number;
     uri: string;
 	};
-	hits: []
 }
 
 let cuisineTypes: string[] = ['Indian', 'American', 'French'];
