@@ -92,14 +92,16 @@ addEventOnElements({
 			`#${this.getAttribute('aria-controls')}`
 		);
 
-		$currentTabPanel?.removeAttribute('hidden');
-		this.setAttribute('aria-selected', 'true');
-		this.setAttribute('tabindex', '0');
+		if ($currentTabPanel) {
+			$currentTabPanel?.removeAttribute('hidden');
+			this.setAttribute('aria-selected', 'true');
+			this.setAttribute('tabindex', '0');
 
-		$lastActiveTabPanel = $currentTabPanel;
-		$lastActiveTabBtn = this;
+			$lastActiveTabPanel = $currentTabPanel;
+			$lastActiveTabBtn = this;
 
-		addTabContent(this, $currentTabPanel);
+			addTabContent(this, $currentTabPanel);
+		}
 	},
 });
 
@@ -217,11 +219,12 @@ const addTabContent = ($currentTabBtn: HTMLElement | null, $currentTabPanel: HTM
 
 			$currentTabPanel.appendChild($girdList);
 
-			if ($currentTabBtn) {
+			if ($currentTabBtn && $currentTabBtn.textContent) {
+				
 				$currentTabPanel.innerHTML += `
 					<a href="/src/pages/recipes.html?mealType=${$currentTabBtn.textContent
-					.trim()
-					.toLowerCase()}" class="btn btn-secondary label-large has-state">Show more</a>
+						.trim()
+						.toLowerCase()}" class="btn btn-secondary label-large has-state">Show more</a>
 				`;
 			}
 		}
@@ -243,6 +246,16 @@ export interface RecipeItem {
 	};
 }
 
+export interface RecipeItem1 {
+  hits: {
+    recipe: {
+      image: string;
+      label: string;
+      totalTime: number;
+      uri: string;
+    };
+  }[];
+}
 let cuisineTypes: string[] = ['Indian', 'American', 'French'];
 
 const sliderSections: NodeListOf<HTMLElement> | null =

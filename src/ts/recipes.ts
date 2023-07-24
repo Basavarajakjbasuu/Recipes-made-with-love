@@ -12,7 +12,7 @@
 
 import { fetchData } from "./api";
 import { $skeletonCard, cardQueries } from "./global";
-import { RecipeItem } from "./home";
+import { RecipeItem, RecipeItem1 } from "./home";
 import { getTime } from "./module";
 
 /**
@@ -67,7 +67,7 @@ const $filterSearch = $filterBar?.querySelector("input[type='search']") as HTMLI
 
 $filterSubmit?.addEventListener('click', function () {
   
-  const $filterCheckboxes = $filterBar?.querySelectorAll("input:checked");
+  const $filterCheckboxes = $filterBar?.querySelectorAll<HTMLInputElement>("input:checked");
 
   const queries: string[] = [];
 
@@ -77,7 +77,10 @@ $filterSubmit?.addEventListener('click', function () {
     for (const $checkbox of $filterCheckboxes) {
       const key = $checkbox.parentElement?.parentElement?.dataset.filter;
       const value = $checkbox.value;
-      queries.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      
+      if (key !== undefined) {
+        queries.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      }
     }
   }
 
@@ -157,9 +160,9 @@ if ($gridList !== null) {
 let nextPageUrl: string;
 const fallbackImage = '../../public/images/image-placeholder.svg';
 
-const renderRecipes = (data: RecipeItem) => {
+const renderRecipes = (data: RecipeItem1) => {
 
-  data?.hits.map((item: RecipeItem, index: number) => {
+  data.hits.map((item: RecipeItem, index: number) => {
 
     const {
       recipe: {

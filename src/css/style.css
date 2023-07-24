@@ -1545,6 +1545,12 @@ input[type="search"]::-webkit-search-cancel-button {
   .mobile-nav { display: none; }
 
   /**
+   * RECIPE SLIDER
+   */
+
+   .slider-item { min-width: calc(20% - 6.4px); }
+   
+  /**
    * FOOTER
    */
 

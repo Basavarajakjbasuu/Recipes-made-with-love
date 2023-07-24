@@ -11,39 +11,41 @@
  */
 
 interface RecipeData {
-  images: {
-    LARGE?: {
-      url: string;
-      width: number;
-      height: number;
+  recipe: {
+    images: {
+      LARGE?: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      REGULAR?: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      SMALL?: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      THUMBNAIL?: {
+        url: string;
+        width: number;
+        height: number;
+      };
     };
-    REGULAR?: {
-      url: string;
-      width: number;
-      height: number;
-    };
-    SMALL?: {
-      url: string;
-      width: number;
-      height: number;
-    };
-    THUMBNAIL?: {
-      url: string;
-      width: number;
-      height: number;
-    };
+    label: string;
+    source: string;
+    ingredients?: string[];
+    totalTime?: number;
+    calories?: number;
+    cuisineType?: string[];
+    dietLabels?: string[];
+    dishType?: string[];
+    yield?: number;
+    ingredientLines?: string[];
+    uri: string;
   };
-  label: string;
-  source: string;
-  ingredients?: string[];
-  totalTime?: number;
-  calories?: number;
-  cuisineType?: string[];
-  dietLabels?: string[];
-  dishType?: string[];
-  yield?: number;
-  ingredientLines?: string[];
-  uri: string;
 }
 
 /**
@@ -63,24 +65,26 @@ window.ACCESS_POINT += `/${window.location.search.slice(window.location.search.i
 fetchData(null, (data: RecipeData) => {
   
   const {
-    images: { LARGE, REGULAR, SMALL, THUMBNAIL },
-    label: title,
-    source: author,
-    ingredients = [],
-    totalTime: cookingTime = 0,
-    calories = 0,
-    cuisineType = [],
-    dietLabels = [],
-    dishType = [],
-    yield: servings = 0,
-    ingredientLines = [],
-    uri
-  } = data.recipe;
+    recipe: {
+      images: { LARGE, REGULAR, SMALL, THUMBNAIL },
+      label: title,
+      source: author,
+      ingredients = [],
+      totalTime: cookingTime = 0,
+      calories = 0,
+      cuisineType = [],
+      dietLabels = [],
+      dishType = [],
+      yield: servings = 0,
+      ingredientLines = [],
+      uri
+    }
+  } = data;
 
   document.title = `${title} - Recipes`;
 
   const banner = LARGE ?? REGULAR ?? SMALL ?? THUMBNAIL;
-  const { url: bannerUrl, width, height } = banner;
+  const { url: bannerUrl, width, height } = banner || {};
   const tags = [...cuisineType, ...dietLabels, ...dishType];
 
   let tagElements = "";

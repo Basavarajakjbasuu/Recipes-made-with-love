@@ -6,6 +6,14 @@
 
 "use strict";
 
+interface SavedRecipeData {
+  recipe: {
+    image: string;
+    label: string;
+    totalTime: number;
+    uri: string;
+  };
+}
 
 /**
  * Imports
@@ -24,17 +32,27 @@ $savedRecipeContainer.innerHTML = `<h2 class="headline-small section-title">All 
 const $gridList = document.createElement("div");
 $gridList.classList.add("grid-list");
 
+
+const parseSavedRecipeData = (savedRecipe: string): SavedRecipeData => {
+  return JSON.parse(savedRecipe) as SavedRecipeData;
+};
+
+
 if (savedRecipes.length) {
   savedRecipes.map((savedRecipe, index) => {
 
-    const {
-      recipe: {
-        image,
-        label: title,
-        totalTime: cookingTime,
-        uri
-      }
-  } = JSON.parse(window.localStorage.getItem(savedRecipe));
+    const savedRecipeData = window.localStorage.getItem(savedRecipe);
+
+    if (typeof savedRecipeData === 'string') {
+
+      const {
+        recipe: {
+          image,
+          label: title,
+          totalTime: cookingTime,
+          uri
+        }
+      } =  parseSavedRecipeData(savedRecipeData);;
   
     // extracting recipeId
     const recipeId = uri.slice(uri.lastIndexOf('_') + 1);
@@ -89,7 +107,8 @@ if (savedRecipes.length) {
     `;
 
     $gridList.appendChild($card);
-  });
+  }
+});
 } else {
   $savedRecipeContainer.innerHTML += `<p class="body-large">You don't saved any recipes yet.</p>`
 }

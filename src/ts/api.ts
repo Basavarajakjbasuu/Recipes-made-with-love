@@ -13,12 +13,16 @@ declare global {
     }
 }
   
-window.ACCESS_POINT = "https://api.edamam.com/api/recipes/v2"
+window.ACCESS_POINT = "https://api.edamam.com/api/recipes/v2";
 
-export const fetchData = async function (queries: [string, string][], successCallback: (data: any) => void) {
+
+
+export const fetchData = async function (queries: [string, string][] | string[][] | null, successCallback: (data: any) => void) {
     const query: string = queries
-                ?.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-                .join("&");
+        ? queries
+            .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+            .join("&")
+        : "";
     
 
     const url = `${window.ACCESS_POINT}?app_id=${import.meta.env.VITE_APP_ID}&app_key=${import.meta.env.VITE_API_KEY}&type=${import.meta.env.VITE_TYPE}${query ? `&${query}` : ""}` 
